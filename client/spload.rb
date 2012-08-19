@@ -15,8 +15,17 @@ class Spload
 end
 
 optparse = OptionParser.new do |opts|
-	opts.on('-u', '--upload [FILE]', 'Uploads to spload.') do |file|
+	opts.on('-u', '--upload [file]', 'Uploads to spload.') do |file|
 		Spload.new.upload file
 	end
+
+	opts.on('-d', '--download [url|id]', 'Downloads from spload.') do |ident|
+		Spload.new.download ident
+	end
+
+	opts.on('-h', '--help', 'Display this screen') do
+		puts opts
+		exit
+  end
 end
 optparse.parse!
