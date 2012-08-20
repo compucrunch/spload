@@ -1,6 +1,7 @@
 require 'rubygems'
 require 'optparse'
 require 'rest_client'
+require 'net/http'
 
 class Spload
 	def upload(file)
@@ -10,7 +11,13 @@ class Spload
 	end
 
 	def download(ident)
-
+		#TODO check for URL or UID
+		Net::HTTP.start('asd.qwe/') do |http|
+  		resp = http.get('/zxc/asd.txt')
+    	open('sample.flv', 'wb') do |file|
+				file.write(resp.body)
+    	end
+		end
 	end
 end
 
@@ -19,7 +26,7 @@ optparse = OptionParser.new do |opts|
 		Spload.new.upload file
 	end
 
-	opts.on('-d', '--download [url|id]', 'Downloads from spload.') do |ident|
+	opts.on('-d', '--download [url | id]', 'Downloads from spload.') do |ident|
 		Spload.new.download ident
 	end
 
@@ -28,4 +35,4 @@ optparse = OptionParser.new do |opts|
 		exit
   end
 end
-optparse.parse!
+optparse.parse! #parse! changes ARGV
